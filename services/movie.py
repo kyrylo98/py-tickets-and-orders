@@ -5,11 +5,9 @@ from db.models import Movie
 from django.db import transaction
 
 
-def get_movies(
-    genres_ids: list[int] = None,
+def get_movies(genres_ids: list[int] = None,
     actors_ids: list[int] = None,
-    title: str = None,
-    ) -> QuerySet:
+    title: str = None) -> QuerySet:
     queryset = Movie.objects.all()
 
     if genres_ids:
@@ -25,7 +23,7 @@ def get_movies(
 
 
 def get_movie_by_id(movie_id: int) -> Movie:
-        return Movie.objects.get(id=movie_id)
+    return Movie.objects.get(id=movie_id)
 
 
 def create_movie(

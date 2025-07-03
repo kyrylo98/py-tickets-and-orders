@@ -9,7 +9,8 @@ from django.core.exceptions import ValidationError
 from datetime import datetime
 
 
-def create_order(tickets: list[dict], username: str, date: str = None) -> Order:
+def create_order(tickets: list[dict], username: str,
+                 date: str = None) -> Order:
     try:
         with transaction.atomic():
             user = User.objects.get(username=username)

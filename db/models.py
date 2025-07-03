@@ -1,6 +1,8 @@
-from django.core.exceptions import ValidationError
 from django.db import models
+
 from django.contrib.auth.models import AbstractUser
+
+from django.core.exceptions import ValidationError
 
 
 class Genre(models.Model):
@@ -92,16 +94,19 @@ class Ticket(models.Model):
 
     def clean(self) -> None:
         errors = {}
-        if self.row not in range(1,
-            self.movie_session.cinema_hall.rows + 1):
-            errors[
-                "row"] = (f"row number must be in available range:"
-            f" (1, rows): (1, {self.movie_session.cinema_hall.rows})")
-        if self.seat not in range(1,
-            self.movie_session.cinema_hall.seats_in_row + 1):
-            errors[
-                "seat"] = (f"seat number must be in available range:"
-        f" (1, seats_in_row): (1, {self.movie_session.cinema_hall.seats_in_row})")
+        if self.row not in range(
+                1, self.movie_session.cinema_hall.rows + 1):
+            errors["row"] = (
+                f"row number must be in available range:"
+                f" (1, rows): (1, {self.movie_session.cinema_hall.rows})"
+            )
+        if self.seat not in range(
+                1, self.movie_session.cinema_hall.seats_in_row + 1):
+            errors["seat"] = (
+                f"seat number must be in available range:"
+                f" (1, seats_in_row): (1, {self.movie_session.cinema_hall.seats_in_row})"
+            )
+
         if errors:
             raise ValidationError(errors)
 

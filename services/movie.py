@@ -5,9 +5,11 @@ from db.models import Movie
 from django.db import transaction
 
 
-def get_movies(genres_ids: list[int] = None,
-    actors_ids: list[int] = None,
-    title: str = None) -> QuerySet:
+def get_movies(
+        genres_ids: list[int] = None,
+        actors_ids: list[int] = None,
+        title: str = None) -> QuerySet:
+
     queryset = Movie.objects.all()
 
     if genres_ids:
